@@ -145,7 +145,7 @@ const Speech = ({
           </ListItem>
         </List>
       </Paper>
-      {langVoices.length && (
+      {langVoices.length > 0 && (
         <Menu
           id="voice-menu"
           anchorEl={anchorEl}
