@@ -8,7 +8,10 @@ import queryString from 'query-string';
 import debounce from 'lodash/debounce';
 
 import API from '../../../api';
-import { ARASAAC_BASE_PATH_API } from '../../../constants';
+import {
+  ARASAAC_BASE_PATH_API,
+  ARASAAC_BASE_PATH_STATIC
+} from '../../../constants';
 import FullScreenDialog from '../../UI/FullScreenDialog';
 import FilterBar from '../../UI/FilterBar';
 import Symbol from '../Symbol';
@@ -154,11 +157,10 @@ export class SymbolSearch extends PureComponent {
         ];
         const arasaacSuggestions = data.map(
           ({ _id: idPictogram, keywords: [keyword] }) => {
+            const defaultResolution = '500';
             return {
               id: keyword.keyword,
-              src: `${ARASAAC_BASE_PATH_API}pictograms/${idPictogram}?${queryString.stringify(
-                { skin, hair }
-              )}`,
+              src: `${ARASAAC_BASE_PATH_STATIC}pictograms/${idPictogram}/${idPictogram}_${defaultResolution}.png`,
               translatedId: keyword.keyword,
               fromArasaac: true
             };
