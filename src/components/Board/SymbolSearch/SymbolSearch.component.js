@@ -4,14 +4,10 @@ import { injectIntl, intlShape } from 'react-intl';
 import Autosuggest from 'react-autosuggest';
 import classNames from 'classnames';
 import isMobile from 'ismobilejs';
-import queryString from 'query-string';
 import debounce from 'lodash/debounce';
 
 import API from '../../../api';
-import {
-  ARASAAC_BASE_PATH_API,
-  ARASAAC_BASE_PATH_STATIC
-} from '../../../constants';
+import { ARASAAC_BASE_PATH_STATIC } from '../../../constants';
 import FullScreenDialog from '../../UI/FullScreenDialog';
 import FilterBar from '../../UI/FilterBar';
 import Symbol from '../Symbol';
@@ -66,8 +62,6 @@ export class SymbolSearch extends PureComponent {
       openMirror: false,
       value: '',
       suggestions: [],
-      skin: 'white',
-      hair: 'brown',
       symbolSets: symbolSetsOptions
     };
 
@@ -143,7 +137,6 @@ export class SymbolSearch extends PureComponent {
     const {
       intl: { locale }
     } = this.props;
-    const { skin, hair } = this.state;
     if (!searchText) {
       return [];
     }
