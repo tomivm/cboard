@@ -135,6 +135,27 @@ export class Board extends Component {
     onTileClick(tile);
   };
 
+  handleKeyDownOnTile = ({ event, tile }) => {
+    const keyCode = event.keyCode;
+    const spaceCode = 32;
+    const enterCode = 13;
+
+    if (keyCode === spaceCode || keyCode === enterCode) {
+      this.handleTileClick(tile);
+    }
+  };
+
+  handlePointerDown = tile => {
+    if (this.props.scannerSettings.active) return;
+    this.handleTileClick(tile);
+  };
+
+  handleScannerClick = tile => {
+    if (this.props.scannerSettings.active) {
+      this.handleTileClick(tile);
+    }
+  };
+
   handleTileFocus = tileId => {
     const { onFocusTile, board } = this.props;
     onFocusTile(tileId, board.id);
@@ -239,9 +260,13 @@ export class Board extends Component {
         backgroundColor={tile.backgroundColor}
         borderColor={tile.borderColor}
         variant={variant}
-        onClick={() => {
-          this.handleTileClick(tile);
+        onPointerDown={() => {
+          this.handlePointerDown(tile);
         }}
+        onClick={() => {
+          this.handleScannerClick(tile);
+        }}
+        onKeyDown={event => this.handleKeyDownOnTile({ event, tile })}
         onFocus={() => {
           this.handleTileFocus(tile.id);
         }}
