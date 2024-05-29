@@ -12,7 +12,7 @@ import boardReducer from './components/Board/Board.reducer';
 import communicatorReducer from './components/Communicator/Communicator.reducer';
 import notificationsReducer from './components/Notifications/Notifications.reducer';
 import subscriptionProviderReducer from './providers/SubscriptionProvider/SubscriptionProvider.reducer';
-import storage from 'redux-persist/lib/storage';
+import localforage from 'localforage';
 import { DEFAULT_BOARDS } from '../src/helpers';
 
 const boardMigrations = {
@@ -29,7 +29,7 @@ const boardMigrations = {
 
 const config = {
   key: 'root',
-  storage,
+  storage: localforage,
   blacklist: ['language'],
   version: 0,
   migrate: createMigrate(boardMigrations, { debug: false })
@@ -37,7 +37,7 @@ const config = {
 
 const languagePersistConfig = {
   key: 'language',
-  storage: storage,
+  storage: localforage,
   blacklist: ['langsFetched']
 };
 
